@@ -1,5 +1,6 @@
+'use script';
 var a, b;
-if (a == b) {
+if (a === b) {
 	console.log(a);
 }
 
@@ -9,16 +10,11 @@ function Car(maxSpeed) {
 }
 
 var ferrari = new Car(240);
-twingo = new car(100);
+var twingo = new Car(100);
 console.log(ferrari, twingo);
 
-console.log(bmw);
+//console.log(bmw);
 
 if (a === null) {
 	console.log('check null or undefined easily');
 }
-
-$(function() {
-	console.log('dom:loaded');
-});
-
