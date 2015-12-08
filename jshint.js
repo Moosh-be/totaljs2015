@@ -14,7 +14,7 @@ console.log(ferrari, twingo);
 
 console.log(bmw);
 
-if (a == null) {
+if (a === null) {
 	console.log('check null or undefined easily');
 }
 

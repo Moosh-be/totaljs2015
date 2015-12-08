@@ -1,0 +1,86 @@
+// Configuration globale au projet de JSHint
+// =========================================
+//
+// (Y compris celui intÃ©grÃ© Ã  votre EDI/Ã©diteur, normalement)
+//
+// [Liste complÃ¨te des options possibles](http://www.jshint.com/docs/options/)
+
+{
+  // Options de restriction
+  // ----------------------
+
+  // Exige les accolades pour les blocs de contrÃ´le
+  "curly": true,
+
+  // Exige des (in)Ã©galitÃ©s strictes : `===` et `!==`
+  "eqeqeq": true,
+
+  // Exige que les fonctions appelÃ©es avec `new` dÃ©marrent par une majuscule
+  // (ce qui est traditionnellement le cas pour un constructeur).
+  "newcap": true,
+
+  // Interdit les hacks basÃ©s sur `arguments.caller` et `arguments.callee`
+  // (qui sont de toutes faÃ§ons illÃ©gaux en ES5 Strict).
+  "noarg": true,
+
+  // Interdit l'emploi de variables non explicitement dÃ©clarÃ©es (ou fournies
+  // via la directive de commentaire `global`).  Permet de dÃ©tecter rapidement
+  // des fautes de frappe dans les identifiants, par exemple, ainsi que des
+  // fuites globales par inadvertance.
+  "undef": true,
+
+  // Avertit de variables ou paramÃ¨tres non utilisÃ©s.  TrÃ¨s pratique pour nettoyer
+  // du code mais aussi pour certains cas de fautes de frappe.
+  "unused": true,
+
+  // Interdit le whitespace en fin de ligne (votre Ã©diteur devrait le nettoyer tout
+  // seul de toutes faÃ§ons, comme avec l'option `trim_trailing_white_space_on_save`
+  // de Sublime Text par exemple).
+  "trailing": true,
+
+  // Interdit plus de 3 niveaux d'imbrication de blocs
+  "maxdepth": 3,
+
+  // Options de relÃ¢chement
+  // ----------------------
+
+  // Ces options assouplissent les restrictions mises en place par JSHint,
+  // qu'elles soient lÃ  par dÃ©faut ou explicitement au travers d'options.
+
+  // Autorise la prÃ©sence d'expressions `debugger` dans le code.
+  "debug": true,
+
+  // Autorise les (in)Ã©galitÃ©s laxistes (`==`et `!=`) si l'opÃ©rande est `null`,
+  // afin de gÃ©rer d'un coup `null` et `undefined`, ce qui est un cas frÃ©quent.
+  "eqnull": true,
+
+  // Autorise les syntaxes ES6 (`let`, `const`, `yield`, `function*`, `module`â€¦)
+  "esnext": true,
+
+  // Autorise les fonctions dans les boucles ; une [IIFE](http://en.wikipedia.org/wiki/Immediately-invoked_function_expression)
+  // dans une boucle est une solution classique aux
+  // [soucis de closure asynchrone](http://www.jshint.com/docs/options/#loopfunc).
+  "loopfunc": true,
+
+  // Options dâ€™environnement
+  // -----------------------
+
+  // Autorise `console`, `alert`, etc.
+  "devel": true,
+
+  // Indique un contexte potentiel Node, donc ses objets globaux (`process`,
+  // `Buffer`, `global`â€¦) mais aussi le droit Ã  des `'use strict'` globaux aux fichiers
+  // (puisque ce sont forcÃ©ment des modules).
+  "node": true,
+
+  // Warnings dÃ©sactivÃ©s
+  // -------------------
+
+  // Autoriser les caractÃ¨res Unicode dans le source
+  "-W100": true,
+
+  // Tuning JS Total
+  // ---------------
+
+  "browser": true
+}
