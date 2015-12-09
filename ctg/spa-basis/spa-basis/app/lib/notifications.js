@@ -10,7 +10,7 @@ var userName = sessionStorage.userName || $.trim(
 if (userName) {
 	sessionStorage.userName = userName;
 } else {
-	userName = 'Anon ' + _.random(1000,10000);
+	userName = 'Anon ' + _.random(1000,10000); 
 }
 
 exports.userName = userName;
