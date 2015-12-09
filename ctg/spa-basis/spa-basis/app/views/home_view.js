@@ -24,10 +24,10 @@ module.exports = View.extend({
 	},
 
 	startClock: function() {
-		var $elf = this;
+		var wally = this;
 		var clock = this.$('#ticker');
 		setInterval(function() {
-			clock.text($elf.getRenderData().now);
+			clock.text(wally.getRenderData().now);
 		}, 1000);
 	}
 });
