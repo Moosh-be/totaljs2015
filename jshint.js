@@ -4,7 +4,6 @@ if (a === b) {
 	console.log(a);
 }
 
-
 function Car(maxSpeed) {
 	this.maxSpeed = maxSpeed;
 }

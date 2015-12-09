@@ -1,5 +1,6 @@
 Function.prototype.throttle = function(duration) {
-	var f = this, end = 0;
+	var f = this,
+		end = 0;
 
 	return function() {
 		var now = Date.now();
@@ -13,9 +14,15 @@ Function.prototype.throttle = function(duration) {
 
 // Protocole de test
 
-function sayHi() { console.log(Date.now(), "Hiiiii…"); }
+
+
+function sayHi() {
+	console.log(Date.now(), "Hiiiii…");
+}
 
 console.log(Date.now());
 hiCoquine = setInterval(sayHi.throttle(1000), 100);
 
-setTimeout(function() { clearInterval(hiCoquine); }, 10000);					
+setTimeout(function() {
+	clearInterval(hiCoquine);
+}, 10000);
