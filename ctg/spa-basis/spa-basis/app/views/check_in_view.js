@@ -9,7 +9,25 @@ var CheckInUx = require('models/check_in_ux');
 module.exports = View.extend({
 	bindings: {
 		'#comment': 'comment',
-		'#geoloc': 'lat'
+		'#geoloc': {
+			observe: ['lat', 'lng'],
+			onGet: function(pos) {
+				if (_.isString(pos[0]) || pos[0] === 0) {
+					return 'Je suis...';
+				}
+				console.log(pos);
+				return _.map(pos, function(coord) {
+					return coord.toFixed(3);
+				}).join(' ');
+			}
+		},
+		'#places': {
+			observe: ['places'],
+			onGet: function() {
+				return this.getRenderData().placesList;
+			},
+			updateMethod: 'html',
+		}
 	},
 	template: require('./templates/check_in'),
 	placesTemplate: require('./templates/places'),
