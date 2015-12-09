@@ -5,7 +5,7 @@
 
 var View = require('./view');
 var userName = require('lib/notifications').userName;
-
+var moment = require('moment');
 
 module.exports = View.extend({
 	// Le template principal
@@ -14,7 +14,20 @@ module.exports = View.extend({
 	getRenderData: function() {
 		console.log(userName);
 		return {
-			userName: userName
+			userName: userName,
+			now: moment().format('dddd D MMMM YYYY HH:mm:ss')
 		};
+	},
+
+	afterRender: function afterHomeRender() {
+		this.startClock();
+	},
+
+	startClock: function() {
+		var $elf = this;
+		var clock = this.$('#ticker');
+		setInterval(function() {
+			clock.text($elf.getRenderData().now);
+		}, 1000);
 	}
 });
