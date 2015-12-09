@@ -20,11 +20,11 @@ var cnxSvc = require('lib/connectivity');
 var JSGURUV3_API_KEY = 'AIzaSyCoiEjsdXfD5roowpX5jN3cwImV1TgGzIs';
 
 // On s'intéresse uniquement à certains types de POI.
-var POI_TYPES = ['bakery', 'bar', 'cafe', 'food', 'meal_takeaway', 'restaurant'];
+var POI_TYPES = ['bakery', 'bar', 'pharmacy', 'cafe', 'food', 'meal_takeaway', 'restaurant'];
 
 // On filtre les résultats sur un certain rayon (en mètres) autour des géocoords
 // initiales.
-var RADIUS = 500;
+var RADIUS = 1500;
 
 // On limite aussi le resultset à un certain nombre de POI, sinon ça devient
 // vite le souk à scanner.
@@ -41,7 +41,7 @@ var localStore = new Lawnchair({ name: 'pois' }, $.noop);
 // (ex. on est offline), on peut travailler avec cette appli en
 // plaçant cette variable `$FAKE` à `true`, ce qui renverra
 // "en dur" des POI autour du siège de Delicious Insights ;-)
-var $FAKE = false;
+var $FAKE = true;
 
 // Fonction interne d'initialisation de l'API par chargement
 // asynchrone de la lib depuis chez Google et exploitation d'un
