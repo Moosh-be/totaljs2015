@@ -2,12 +2,41 @@
 
 var Backbone = require('backbone');
 var _ = require('underscore');
+var LawnChair = require('lawnchair');
 
 var connectivity = require('lib/connectivity');
 var CheckInsCollection = require('models/collection');
 var collection = new CheckInsCollection();
 
-var pendings = false;
+var pendings = [];
+
+require('lawnchair-dom');
+var localStore = new LawnChair({
+	names: 'checkins'
+}, function() {});
+
+collection.on('reset', function() {
+	localStore.nuke(function() {
+		localStore.nuke(function() {
+			localStore.batch(collection.toJSON());
+		});
+	});
+	Backbone.Mediator.publish('checkins:reset');
+});
+
+collection.on('add', function(model) {
+	localStore.save(model.toJSON());
+	Backbone.Mediator.publish('checkins:new', model.toJSON());
+});
+
+collection.on('sync', function(model) {
+  if (!(model instanceof collection.model)) {
+    return;
+  }
+
+  localStore.save(model.toJSON());
+});
+
 
 function addCheckIn(checkIn) {
 	checkIn.key = checkIn.key || Date.now();
@@ -43,19 +72,16 @@ function syncPending() {
 			reset: true
 		});
 }
-syncPending();
+initialLoad();
+
+function initialLoad(argument) {
+	localStore.all(function(checkins) {
+		collection.reset(checkins);
+		syncPending();
+	})
+}
 
 Backbone.Mediator.subscribe('connectivity:online', syncPending);
-
-collection.on('reset', function() {
-	Backbone.Mediator.publish('checkins:reset');
-});
-
-collection.on('add', function(model) {
-	console.log(model);
-	Backbone.Mediator.publish('checkins:new', model.toJSON());
-});
-
 
 module.exports = {
 	addCheckIn: addCheckIn,

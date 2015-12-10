@@ -5,7 +5,6 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
 
-console.log('eeeeeeeeeeeeeeeee');
 exports.isOnline = function() {
 	return true;
 };
