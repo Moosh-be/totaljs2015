@@ -35,6 +35,12 @@ module.exports = View.extend({
 				observe: 'checkInForbidden',
 			}],
 		},
+		'header button': {
+			attributes: [{
+				name: 'disabled',
+				observe: 'fetchPlacesForbidden'
+			}]
+		}
 	},
 	events: {
 		'click .btn-info': 'fetchPlaces',
@@ -64,7 +70,6 @@ module.exports = View.extend({
 			});
 
 			poiService.lookupPlaces(lat, lng, function(places) {
-//				console.table(places);
 				that.model.set('places', places);
 			});
 		});

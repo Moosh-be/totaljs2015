@@ -22,7 +22,6 @@ module.exports = View.extend({
 		'connectivity:offline': 'syncMarker',
 	},
 
-
 	afterRender: function afterHomeRender() {
 		this.startClock();
 		this.syncMarker();
