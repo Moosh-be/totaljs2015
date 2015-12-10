@@ -24,6 +24,11 @@ collection.on('reset', function() {
 	Backbone.Mediator.publish('checkins:reset');
 });
 
+collection.on('add', function(model) {
+	console.log(model);
+  Backbone.Mediator.publish('checkins:new', model.toJSON());
+});
+
 syncPending();
 
 module.exports = {

@@ -8,7 +8,8 @@ module.exports = View.extend({
 	template: require('./templates/history'),
 	listTemplate: require('./templates/check_ins'),
 	subscriptions: {
-		'checkins:reset': 'render'
+		'checkins:reset': 'render',
+		'checkins:new': 'render',
 	},
 
 
