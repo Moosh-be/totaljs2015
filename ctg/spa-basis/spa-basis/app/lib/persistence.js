@@ -47,6 +47,10 @@ function getCheckIns() {
 	return collection.toJSON();
 }
 
+function getCheckIn(id) {
+	return collection.get(id);
+}
+
 function accountForSync(model) {
 	pendings = _.without(pendings, model);
 	if (pendings.length) return;
@@ -86,4 +90,5 @@ Backbone.Mediator.subscribe('connectivity:online', syncPending);
 module.exports = {
 	addCheckIn: addCheckIn,
 	getCheckIns: getCheckIns,
+	getCheckIn: getCheckIn
 };

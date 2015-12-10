@@ -6,6 +6,8 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
 var application = require('application');
+var CheckInDetailsView = require('views/check_in_details_view');
+var store = require('lib/persistence');
 
 module.exports = Backbone.Router.extend({
   // Déclaration
@@ -17,9 +19,9 @@ module.exports = Backbone.Router.extend({
   },
 
   showCheckIn: function(id) {
-    console.log('check-id', id,arguments);
-
-    // body...
+//    console.log('check-id', id,arguments);
+    this.home(true);
+    CheckInDetailsView.display( store.getCheckIn(id));
   },
   // Gestionnaires
   // -------------
