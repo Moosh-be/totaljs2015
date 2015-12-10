@@ -3,6 +3,7 @@
 var _ = require('underscore');
 var gpsService = require('lib/location');
 var poiService = require('lib/places');
+var store = require('lib/persistence');
 var userName = require('lib/notifications').userName;
 
 var CheckInUx = require('models/check_in_ux');
@@ -93,8 +94,7 @@ module.exports = View.extend({
 			'comment': this.model.defaults.comment,
 			'placeId': this.model.defaults.placeId,
 		});
-		console.log(checkIn);
-
+		store.addCheckIn(checkIn);
 	},
 	getRenderData: function() {
 		return {
