@@ -69,7 +69,7 @@ exports.config =
   # on fournit aussi une mini-API Ajax et un point d'accès WebSockets.
   server:
     path: 'jst-server.coffee'
-
+    
   # Watcher
   # -------
   #

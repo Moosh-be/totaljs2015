@@ -2,7 +2,7 @@
 
 var View = require('./view');
 var store = require('lib/persistence');
-
+var Backbone = require('backbone');
 module.exports = View.extend({
 	// Le template principal
 	template: require('./templates/history'),
@@ -11,7 +11,18 @@ module.exports = View.extend({
 		'checkins:reset': 'render',
 		'checkins:new': 'insertCheckin',
 	},
-
+	events: {
+		'click li': 'showbrol'
+	},
+	showbrol: function showbrol(e) {
+		var id = e.currentTarget.getAttribute('data-id');
+		if (!id) {
+			return;
+		}
+		Backbone.history.navigate('check-in/' + id, {
+			trigger: true
+		});
+	},
 	insertCheckin: function(checkIn) {
 		console.log('insertCheckin', checkIn);
 		checkIn.extra_class = 'new';
@@ -20,9 +31,9 @@ module.exports = View.extend({
 		}, this.listTemplate);
 		var list = this.$('#history');
 		list.prepend(markup);
-		setTimeout(function  () {
+		setTimeout(function() {
 			list.find('li.new').removeClass('new');
-		},20);
+		}, 20);
 	},
 
 	getRenderData: function() {
