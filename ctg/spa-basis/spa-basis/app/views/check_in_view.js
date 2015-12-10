@@ -64,7 +64,7 @@ module.exports = View.extend({
 			});
 
 			poiService.lookupPlaces(lat, lng, function(places) {
-				console.table(places);
+//				console.table(places);
 				that.model.set('places', places);
 			});
 		});

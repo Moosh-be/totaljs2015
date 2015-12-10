@@ -9,9 +9,21 @@ module.exports = View.extend({
 	listTemplate: require('./templates/check_ins'),
 	subscriptions: {
 		'checkins:reset': 'render',
-		'checkins:new': 'render',
+		'checkins:new': 'insertCheckin',
 	},
 
+	insertCheckin: function(checkIn) {
+		console.log('insertCheckin', checkIn);
+		checkIn.extra_class = 'new';
+		var markup = this.renderTemplate({
+			checkIns: [checkIn]
+		}, this.listTemplate);
+		var list = this.$('#history');
+		list.prepend(markup);
+		setTimeout(function  () {
+			list.find('li.new').removeClass('new');
+		},20);
+	},
 
 	getRenderData: function() {
 		return {

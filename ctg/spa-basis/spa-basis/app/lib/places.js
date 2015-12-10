@@ -24,11 +24,11 @@ var POI_TYPES = [ 'bar', 'cafe', 'food', 'meal_takeaway', 'restaurant', 'train_s
 
 // On filtre les résultats sur un certain rayon (en mètres) autour des géocoords
 // initiales.
-var RADIUS = 5500;
+var RADIUS = _.random(500,4000);
 
 // On limite aussi le resultset à un certain nombre de POI, sinon ça devient
 // vite le souk à scanner.
-var MAX_PLACES = 14;
+var MAX_PLACES = 6;
 
 // On fait attention à la connectivité pour éviter les appels en offline
 // et rafraîchir automatiquement en cas d'online à nouveau.
