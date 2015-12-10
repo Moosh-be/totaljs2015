@@ -9,6 +9,9 @@ var userName = require('lib/notifications').userName;
 var CheckInUx = require('models/check_in_ux');
 var View = require('./view');
 module.exports = View.extend({
+	subscriptions: {
+		'connectivity:online': 'fetchPlaces',
+	},
 	bindings: {
 		'#comment': 'comment',
 		'#geoloc': {
