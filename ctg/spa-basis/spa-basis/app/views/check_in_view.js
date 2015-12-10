@@ -3,10 +3,10 @@
 var _ = require('underscore');
 var gpsService = require('lib/location');
 var poiService = require('lib/places');
+var userName = require('lib/notifications').userName;
 
 var CheckInUx = require('models/check_in_ux');
 var View = require('./view');
-
 module.exports = View.extend({
 	bindings: {
 		'#comment': 'comment',
@@ -22,16 +22,23 @@ module.exports = View.extend({
 			}
 		},
 		'#places': {
-			observe: ['places','placeId'],
+			observe: ['places', 'placeId'],
 			onGet: function() {
 				return this.getRenderData().placesList;
 			},
 			updateMethod: 'html',
-		}
+		},
+		'button[type=submit]': {
+			attributes: [{
+				name: 'disabled',
+				observe: 'checkInForbidden',
+			}],
+		},
 	},
 	events: {
 		'click .btn-info': 'fetchPlaces',
 		'click #places li': 'selectPlaces',
+		'submit': 'checkIn',
 	},
 	template: require('./templates/check_in'),
 	placesTemplate: require('./templates/places'),
@@ -44,7 +51,7 @@ module.exports = View.extend({
 	},
 	fetchPlaces: function fetchPlaces() {
 		var that = this;
-        that.model.set( this.model.defaults);
+		that.model.set(this.model.defaults);
 		gpsService.getCurrentLocation(function(lat, lng) {
 			if (_.isString(lat)) {
 				return;
@@ -61,13 +68,33 @@ module.exports = View.extend({
 			});
 		});
 	},
-	selectPlaces: function (e) {
-		var clicked = this.$(e.currentTarget);
-        //var clicked = e.currentTarget.getAttribute('data-place-id');
-        var placeId = clicked.data('place-id');
-        this.model.set('placeId', placeId);
 
-		//.addClasse('active');
+	selectPlaces: function(e) {
+		var clicked = this.$(e.currentTarget);
+		var placeId = clicked.data('place-id');
+		this.model.set('placeId', placeId);
+	},
+
+	checkIn: function(e) {
+		e.preventDefault();
+		if (this.model.get('checkInForbidden')) {
+			return;
+		}
+		var place = this.model.getPlace();
+		var checkIn = {
+			placeId: place.id,
+			vicinity: place.vicinity,
+			icon: place.icon,
+			name: place.name,
+			comment: this.model.get('comment'),
+			userName: userName
+		};
+		this.model.set({
+			'comment': this.model.defaults.comment,
+			'placeId': this.model.defaults.placeId,
+		});
+		console.log(checkIn);
+
 	},
 	getRenderData: function() {
 		return {
