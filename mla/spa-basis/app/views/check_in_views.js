@@ -6,6 +6,7 @@ var poiSvc = require('lib/places');
 var CheckInUx = require('models/check_in_ux');
 var _ = require('underscore');
 var userName = require('lib/notifications').userName;
+var store = require('lib/persistence');
 
 module.exports = View.extend({
 	bindings: {
@@ -58,6 +59,7 @@ module.exports = View.extend({
 			comment : this.model.get('comment'),
 			userName : userName
 		};
+		store.addCheckIn(checkIn);
 		this.model.set({
 			comment : this.model.defaults.comment,
 			placeId : this.model.defaults.placeId
