@@ -27,8 +27,15 @@ function syncPending() {
 syncPending();
 
 collection.on('reset', function() {
-	console.log('reset');
+	// console.log('reset');
 	Backbone.Mediator.publish('checkins:reset');
+});
+
+collection.on('add', function(model) {
+	// console.log('reset');
+	Backbone.Mediator.publish(
+		'checkins:new', model.toJSON()
+	);
 });
 
 module.exports = {
