@@ -24,7 +24,7 @@ var POI_TYPES = [ 'bar', 'cafe', 'food', 'meal_takeaway', 'restaurant', 'train_s
 
 // On filtre les résultats sur un certain rayon (en mètres) autour des géocoords
 // initiales.
-var RADIUS = 2500;
+var RADIUS = 5500;
 
 // On limite aussi le resultset à un certain nombre de POI, sinon ça devient
 // vite le souk à scanner.

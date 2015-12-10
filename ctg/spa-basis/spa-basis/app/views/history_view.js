@@ -9,7 +9,10 @@ module.exports = View.extend({
 	listTemplate: require('./templates/check_ins'),
 
 	getRenderData: function() {
-		return {};
+		console.log();
+		return {
+			'list':this.renderTemplate({checkIns:store.getCheckIns()},this.listTemplate)
+		};
 	},
 	afterRender: function afterHomeRender() {},
 });
