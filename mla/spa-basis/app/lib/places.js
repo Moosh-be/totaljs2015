@@ -41,7 +41,7 @@ var localStore = new Lawnchair({ name: 'pois' }, $.noop);
 // (ex. on est offline), on peut travailler avec cette appli en
 // plaçant cette variable `$FAKE` à `true`, ce qui renverra
 // "en dur" des POI autour du siège de Delicious Insights ;-)
-var $FAKE = true;
+var $FAKE = false;
 
 // Fonction interne d'initialisation de l'API par chargement
 // asynchrone de la lib depuis chez Google et exploitation d'un
