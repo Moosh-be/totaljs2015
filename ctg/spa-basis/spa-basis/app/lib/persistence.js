@@ -30,11 +30,11 @@ collection.on('add', function(model) {
 });
 
 collection.on('sync', function(model) {
-  if (!(model instanceof collection.model)) {
-    return;
-  }
+	if (!(model instanceof collection.model)) {
+		return;
+	}
 
-  localStore.save(model.toJSON());
+	localStore.save(model.toJSON());
 });
 
 

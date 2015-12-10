@@ -19,9 +19,8 @@ module.exports = Backbone.Router.extend({
   },
 
   showCheckIn: function(id) {
-//    console.log('check-id', id,arguments);
     this.home(true);
-    CheckInDetailsView.display( store.getCheckIn(id));
+    CheckInDetailsView.display(store.getCheckIn(id));
   },
   // Gestionnaires
   // -------------
