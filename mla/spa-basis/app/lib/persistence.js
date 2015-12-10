@@ -2,10 +2,16 @@
 
 var CheckInsCollection = require('models/collection');
 var collection = new CheckInsCollection();
+var Backbone = require('backbone');
 
 function addCheckIn(checkIn) {
 	checkIn.key = checkIn.key || Date.now();
-	collection.create(checkIn);
+
+	if ('id' in checkIn) {
+		collection.add(checkIn);
+	} else {
+		collection.create(checkIn);
+	}
 	//console.log(checkIn);
 }
 
@@ -19,6 +25,11 @@ function syncPending() {
 	});
 }
 syncPending();
+
+collection.on('reset', function() {
+	console.log('reset');
+	Backbone.Mediator.publish('checkins:reset');
+});
 
 module.exports = {
 	addCheckIn: addCheckIn,

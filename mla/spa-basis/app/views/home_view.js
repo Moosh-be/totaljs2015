@@ -7,6 +7,8 @@ var View = require('./view');
 var userName = require('lib/notifications').userName;
 var moment = require('moment');
 var CheckInView = require('./check_in_views');
+var HistoryView = require('./history_view');
+
 
 module.exports = View.extend({
   // Le template principal
@@ -24,6 +26,9 @@ module.exports = View.extend({
   	new CheckInView({
   		el: this.$('#checkInUI')
   	}).render();
+    new HistoryView({
+      el: this.$('#historyUI')
+    }).render();
   },
 
   startClock: function () {

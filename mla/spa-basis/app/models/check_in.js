@@ -10,4 +10,5 @@ var Backbone = require('backbone');
 // module par modèle et par collection, donc voilà.
 
 module.exports = Backbone.Model.extend({
+	
 });
