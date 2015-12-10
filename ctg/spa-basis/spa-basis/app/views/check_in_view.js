@@ -22,7 +22,7 @@ module.exports = View.extend({
 			}
 		},
 		'#places': {
-			observe: ['places'],
+			observe: ['places','placeId'],
 			onGet: function() {
 				return this.getRenderData().placesList;
 			},
@@ -44,7 +44,7 @@ module.exports = View.extend({
 	},
 	fetchPlaces: function fetchPlaces() {
 		var that = this;
-        that.model.set('places', this.model.get('places'));
+        that.model.set( this.model.defaults);
 		gpsService.getCurrentLocation(function(lat, lng) {
 			if (_.isString(lat)) {
 				return;
@@ -58,19 +58,22 @@ module.exports = View.extend({
 			poiService.lookupPlaces(lat, lng, function(places) {
 				console.table(places);
 				that.model.set('places', places);
-				//			that.render();
 			});
 		});
 	},
 	selectPlaces: function (e) {
-		console.log(e);
-		console.log(this);
-		// $('').addClasse('active');
+		var clicked = this.$(e.currentTarget);
+        //var clicked = e.currentTarget.getAttribute('data-place-id');
+        var placeId = clicked.data('place-id');
+        this.model.set('placeId', placeId);
+
+		//.addClasse('active');
 	},
 	getRenderData: function() {
 		return {
 			placesList: this.renderTemplate({
-				places: this.model.get('places')
+				places: this.model.get('places'),
+				placeId: this.model.get('placeId')
 			}, this.placesTemplate)
 		};
 	}
