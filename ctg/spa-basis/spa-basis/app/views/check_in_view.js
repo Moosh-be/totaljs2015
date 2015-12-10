@@ -48,7 +48,7 @@ module.exports = View.extend({
 		this.model = new CheckInUx();
 	},
 	afterRender: function afterHomeRender() {
-		//this.fetchPlaces();
+		this.fetchPlaces();
 	},
 	fetchPlaces: function fetchPlaces() {
 		var that = this;

@@ -2,12 +2,26 @@
 // ========================
 
 'use strict';
+var Backbone = require('backbone');
+var $ = require('jquery');
 
-// Ce module encapsule la gestion de la connectivité
-// (états online/offline du navigateur) à destination des
-// divers éléments externes (notamment la couche de persistence
-// et les exploitations d'API externes type Google Maps / Places).
+console.log('eeeeeeeeeeeeeeeee');
+exports.isOnline = function() {
+	return true;
+};
 
-// On publie une seule méthode : isOnline.  Indique le bon état en
-// live sur à peu près tous les browsers modernes.
-exports.isOnline = function() { return true; };
+if ('undefinded' !== typeof navigator && 'onLine' in navigator) {
+	exports.isOnline = function() {
+		console.log(navigator.onLine, 'isOnline');
+		return navigator.onLine;
+	};
+
+	$(window).on('online offline', checkStatus);
+	checkStatus();
+}
+
+function checkStatus() {
+	Backbone.Mediator.publish(
+		exports.isOnline() ? 'connectivity:online' : 'connectivity:offline'
+	);
+}
