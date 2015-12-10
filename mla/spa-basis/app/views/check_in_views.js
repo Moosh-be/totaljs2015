@@ -9,6 +9,9 @@ var userName = require('lib/notifications').userName;
 var store = require('lib/persistence');
 
 module.exports = View.extend({
+	subscriptions : {
+		'connectivity:online' : 'fetchPlaces'
+	},
 	bindings: {
 		// sélecteur CSS -> descripteur de binding, +/- avancé
 		'#comment': 'comment',
@@ -35,6 +38,12 @@ module.exports = View.extend({
 			attributes: [{
 				name: 'disabled',
 				observe: 'checkInForbidden'
+			}]
+		},
+		'header button': {
+			attributes: [{
+				name: 'disabled',
+				observe: 'fetchPlacesForbidden'
 			}]
 		},
 	},
@@ -104,6 +113,9 @@ module.exports = View.extend({
 				that.model.set('places', places);
 			});
 		});
+	},
+	fetchPlacesForbidden: function () {
+		return this.model.get('checkInForbidden');
 	}
 
 });
