@@ -20,7 +20,7 @@ var cnxSvc = require('lib/connectivity');
 var JSGURUV3_API_KEY = 'AIzaSyCoiEjsdXfD5roowpX5jN3cwImV1TgGzIs';
 
 // On s'intéresse uniquement à certains types de POI.
-var POI_TYPES = ['bakery', 'bar', 'pharmacy', 'cafe', 'food', 'meal_takeaway', 'restaurant'];
+var POI_TYPES = ['bakery', 'bar', 'cafe', 'food', 'meal_takeaway', 'restaurant'];
 
 // On filtre les résultats sur un certain rayon (en mètres) autour des géocoords
 // initiales.
