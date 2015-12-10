@@ -12,9 +12,15 @@ module.exports = Backbone.Router.extend({
   // -----------
   routes: {
     // La route racine, pour la page principale
-    '': 'home'
+    '': 'home',
+    'check-in/:id': 'showCheckIn'
   },
 
+  showCheckIn: function(id) {
+    console.log('check-id', id,arguments);
+
+    // body...
+  },
   // Gestionnaires
   // -------------
 
