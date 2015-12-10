@@ -5,23 +5,20 @@ var collection = new CheckInsCollection();
 
 function addCheckIn(checkIn) {
 	checkIn.key = checkIn.key || Date.now();
-	collection.create(checkIn);
-	console.log('addCheckIn', checkIn);
-	console.log(collection);
-
+	collection[('id' in checkIn) ? 'add' : 'create'](checkIn);
 }
 
 function getCheckIns() {
 	return collection.toJSON();
 }
 
-function syncPending () {
+function syncPending() {
 	collection.fetch({
 		reset: true,
 	});
 }
-syncPending();
 
+syncPending();
 
 module.exports = {
 	addCheckIn: addCheckIn,
