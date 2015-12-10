@@ -1,8 +1,11 @@
 'use strict';
 
-var View = require('./view');
-var store = require('lib/persistence');
 var Backbone = require('backbone');
+
+var store = require('lib/persistence');
+
+var View = require('./view');
+
 module.exports = View.extend({
 	// Le template principal
 	template: require('./templates/history'),
@@ -12,9 +15,9 @@ module.exports = View.extend({
 		'checkins:new': 'insertCheckin',
 	},
 	events: {
-		'click li': 'showbrol'
+		'click li': 'showChecking'
 	},
-	showbrol: function showbrol(e) {
+	showChecking: function showChecking(e) {
 		var id = e.currentTarget.getAttribute('data-id');
 		if (!id) {
 			return;
@@ -24,7 +27,6 @@ module.exports = View.extend({
 		});
 	},
 	insertCheckin: function(checkIn) {
-		console.log('insertCheckin', checkIn);
 		checkIn.extra_class = 'new';
 		var markup = this.renderTemplate({
 			checkIns: [checkIn]

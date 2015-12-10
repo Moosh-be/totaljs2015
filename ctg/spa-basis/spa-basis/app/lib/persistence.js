@@ -5,9 +5,10 @@ var _ = require('underscore');
 var LawnChair = require('lawnchair');
 
 var connectivity = require('lib/connectivity');
-var CheckInsCollection = require('models/collection');
-var collection = new CheckInsCollection();
 
+var CheckInsCollection = require('models/collection');
+
+var collection = new CheckInsCollection();
 var pendings = [];
 
 require('lawnchair-dom');
@@ -36,7 +37,6 @@ collection.on('sync', function(model) {
 
 	localStore.save(model.toJSON());
 });
-
 
 function addCheckIn(checkIn) {
 	checkIn.key = checkIn.key || Date.now();

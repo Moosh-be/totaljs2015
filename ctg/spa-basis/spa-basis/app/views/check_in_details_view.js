@@ -1,8 +1,9 @@
 'use stricts';
 
-var View = require('./view');
 var $ = require('jquery');
 var Backbone = require('backbone');
+
+var View = require('./view');
 
 var CheckInDetailsView = View.extend({
 	className: 'modal fade',
