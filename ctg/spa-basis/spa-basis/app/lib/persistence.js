@@ -2,6 +2,7 @@
 
 var Backbone = require('backbone');
 
+var connectivity = require('lib/connectivity');
 var CheckInsCollection = require('models/collection');
 var collection = new CheckInsCollection();
 
@@ -15,6 +16,9 @@ function getCheckIns() {
 }
 
 function syncPending() {
+
+	if(!connectivity.isOnline()) return;
+	
 	collection.fetch({
 		reset: true,
 	});

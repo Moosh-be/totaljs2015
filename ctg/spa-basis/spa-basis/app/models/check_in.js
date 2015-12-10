@@ -4,10 +4,13 @@
 'use strict';
 
 var Backbone = require('backbone');
-
-// Bon, on n'a *rien* à rajouter aux capacités inhérentes
-// de Backbone.Model, mais c'est toujours mieux de prévoir un
-// module par modèle et par collection, donc voilà.
+var connectivity = require('lib/connectivity');
 
 module.exports = Backbone.Model.extend({
+	sync: function(method, model, options) {
+		console.log('check:in', method, model, options);
+		if (!connectivity.isOnline()) return;
+		return Backbone.sync(method, model, options);
+	}
+
 });
