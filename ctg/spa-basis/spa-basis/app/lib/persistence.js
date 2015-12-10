@@ -1,5 +1,7 @@
 'use stricts';
 
+var Backbone = require('backbone');
+
 var CheckInsCollection = require('models/collection');
 var collection = new CheckInsCollection();
 
@@ -17,6 +19,10 @@ function syncPending() {
 		reset: true,
 	});
 }
+
+collection.on('reset', function() {
+	Backbone.Mediator.publish('checkins:reset');
+});
 
 syncPending();
 
