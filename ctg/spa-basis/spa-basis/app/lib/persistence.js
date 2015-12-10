@@ -1,10 +1,13 @@
 'use stricts';
 
 var Backbone = require('backbone');
+var _ = require('underscore');
 
 var connectivity = require('lib/connectivity');
 var CheckInsCollection = require('models/collection');
 var collection = new CheckInsCollection();
+
+var pendings = false;
 
 function addCheckIn(checkIn) {
 	checkIn.key = checkIn.key || Date.now();
@@ -15,14 +18,34 @@ function getCheckIns() {
 	return collection.toJSON();
 }
 
-function syncPending() {
+function accountForSync(model) {
+	pendings = _.without(pendings, model);
+	if (pendings.length) return;
 
-	if(!connectivity.isOnline()) return;
-	
+	collection.off('sync', accountForSync);
 	collection.fetch({
-		reset: true,
+		reset: true
 	});
 }
+
+function syncPending() {
+	if (!connectivity.isOnline()) return;
+
+	collection.off('sync', accountForSync);
+	pendings = collection.filter(function(c) {
+		return c.isNew();
+	});
+	if (pendings.length) {
+		collection.on('sync', accountForSync);
+		_.invoke(pendings, 'save');
+	} else
+		collection.fetch({
+			reset: true
+		});
+}
+syncPending();
+
+Backbone.Mediator.subscribe('connectivity:online', syncPending);
 
 collection.on('reset', function() {
 	Backbone.Mediator.publish('checkins:reset');
@@ -30,10 +53,9 @@ collection.on('reset', function() {
 
 collection.on('add', function(model) {
 	console.log(model);
-  Backbone.Mediator.publish('checkins:new', model.toJSON());
+	Backbone.Mediator.publish('checkins:new', model.toJSON());
 });
 
-syncPending();
 
 module.exports = {
 	addCheckIn: addCheckIn,
