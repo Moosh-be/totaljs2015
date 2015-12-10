@@ -10,6 +10,9 @@ var Backbone = require('backbone');
 // pratiques des collections Backbone.
 
 module.exports = Backbone.Collection.extend({
-  model: require('./check_in'),
-  url:'/api/v1/checkins',
+	model: require('./check_in'),
+	url: '/api/v1/checkins',
+	comparator: function(c1, c2) {
+		return +c2.get('key') - +c1.get('key');
+	}
 });
