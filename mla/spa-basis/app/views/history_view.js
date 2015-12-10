@@ -2,11 +2,21 @@
 
 var View = require('./view');
 var store = require('lib/persistence');
+var Backbone = require('backbone');
 
 module.exports = View.extend({
   // Le template principal
   template: require('./templates/history'),
   listTemplate: require('./templates/check_ins'),
+
+  events : {
+    'click li' : 'showCheckInDetail'
+  },
+
+  showCheckInDetail : function (e) {
+    var id = this.$(e.currentTarget).data('id');
+    Backbone.history.navigate('check-in/'+id, {trigger:true});
+  },
 
   getRenderData: function() {
     return {
