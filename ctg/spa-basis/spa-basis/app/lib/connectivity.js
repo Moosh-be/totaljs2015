@@ -9,7 +9,7 @@ exports.isOnline = function() {
 	return true;
 };
 
-if ('undefinded' !== typeof navigator && 'onLine' in navigator) {
+if ('undefined' !== typeof navigator && 'onLine' in navigator) {
 	exports.isOnline = function() {
 //		console.log(navigator.onLine, 'isOnline');
 		return navigator.onLine;
