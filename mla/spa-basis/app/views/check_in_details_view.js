@@ -32,8 +32,7 @@ function cancelCheckInDetails() {
 	});
 }
 
-function displayCheckInDetails(id) {
-	var model = store.getCheckIn(id);
+function displayCheckInDetails(model) {
 	singleton.model = model;
 	singleton.render();
 	$('body').append(singleton.el);
