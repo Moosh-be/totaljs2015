@@ -1,10 +1,16 @@
 'use stricts';
 
 /* global describe, before, it, beforeEach */
-describe('The collection', function() {
-	before(function() {}); // Avant l'ensemble du `describe`
 
-	beforeEach(function() {}); // Avant chaque `it`
+describe('The collection', function() {
+	before(function() {
+//		console.log('before');
+	}); // Avant l'ensemble du `describe`
+
+	beforeEach(function() {
+//		console.log('after');
+
+	}); // Avant chaque `it`
 
 	// Et aussi : `after`, `afterEach`
 
@@ -12,3 +18,4 @@ describe('The collection', function() {
 		// Setup du test et assertions ici
 	});
 });
+
