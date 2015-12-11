@@ -2,9 +2,11 @@
 
 /* global describe, before, it, beforeEach */
 
+var chai = require('chai');
+
 describe('The collection', function() {
 	before(function() {
-//		console.log('before');
+		chai.should();
 	}); // Avant l'ensemble du `describe`
 
 	beforeEach(function() {
