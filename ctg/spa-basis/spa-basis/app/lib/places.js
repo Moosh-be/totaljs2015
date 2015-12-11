@@ -20,11 +20,11 @@ var cnxSvc = require('lib/connectivity');
 var JSGURUV3_API_KEY = 'AIzaSyCoiEjsdXfD5roowpX5jN3cwImV1TgGzIs';
 
 // On s'intéresse uniquement à certains types de POI.
-var POI_TYPES = [ 'bar', 'cafe', 'food', 'meal_takeaway', 'restaurant', 'train_station'];
+var POI_TYPES = [  'train_station'];
 
 // On filtre les résultats sur un certain rayon (en mètres) autour des géocoords
 // initiales.
-var RADIUS = _.random(500,4000);
+var RADIUS = _.random(5000,40000);
 
 // On limite aussi le resultset à un certain nombre de POI, sinon ça devient
 // vite le souk à scanner.
