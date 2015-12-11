@@ -11,7 +11,7 @@ exports.isOnline = function() {
 
 if ('undefinded' !== typeof navigator && 'onLine' in navigator) {
 	exports.isOnline = function() {
-		console.log(navigator.onLine, 'isOnline');
+//		console.log(navigator.onLine, 'isOnline');
 		return navigator.onLine;
 	};
 

@@ -28,7 +28,7 @@ module.exports = Backbone.Model.extend({
 		}
 		function checkFetchable() {
 			that.set('fetchPlacesForbidden', !connectivity.isOnline());
-			console.log('connectivity.isOnline',connectivity.isOnline());
+//			console.log('connectivity.isOnline',connectivity.isOnline());
 		}
 
 
