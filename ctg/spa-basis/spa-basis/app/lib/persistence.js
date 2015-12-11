@@ -47,8 +47,30 @@ function getCheckIns() {
 	return collection.toJSON();
 }
 
-function getCheckIn(id) {
-	return collection.get(id);
+function getCheckIn(id, cb) {
+	var checkIn = collection.get(id);
+
+	if (checkIn) {
+		return _.defer(cb, null, checkIn.toJSON());
+	}
+
+	checkIn = new collection.model({
+		id: id
+	});
+	checkIn.urlRoot = collection.url;
+	checkIn.fetch({
+		success: setupCheckIn,
+		error: reportError
+	});
+
+	function setupCheckIn() {
+		collection.add(checkIn);
+		cb(null, checkIn.toJSON());
+	}
+
+	function reportError() {
+		cb(0xDEAD);
+	}
 }
 
 function accountForSync(model) {
